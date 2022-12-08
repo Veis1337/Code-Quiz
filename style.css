@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: auto;
+    background-color: #150622;
+    color: #E4B448;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 2em 0 2em;
+}
+
+#quizSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #150622;
+    background-color: #e5eaf5;
+    margin: 0;
+    padding: 1em;
+}
+
+#questionHeading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid #150622 .2em;
+    color: #150622;
+    padding: 1em;
+}
+
+#startButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #e5eaf5;
+    color: #150622;
+    border: solid #150622 .1em;
+    padding: 1em;
+    margin: 1em;
+}
+
+#answersBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    border:solid #150622 .2em;
+    color: #150622; 
+    font-size: 1.1em;
+    padding: 0 3em 2em 3em;
+    width: 80%;
+}
+
+li {
+    list-style-type: none;
+    margin: .25em;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* GIVEN I am taking a code quiz
+WHEN I click the start button
+THEN a timer starts and I am presented with a question
+WHEN I answer a question
+THEN I am presented with another question
+WHEN I answer a question incorrectly
+THEN time is subtracted from the clock
+WHEN all questions are answered or the timer reaches 0
+THEN the game is over
+WHEN the game is over
+THEN I can save my initials and score */
