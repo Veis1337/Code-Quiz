@@ -55,8 +55,8 @@ header {
     flex-direction: column;
     justify-content: left;
     align-items: flex-start;
-    border:solid #150622 .2em;
-    color: #150622; 
+    border: solid #150622 .2em;
+    color: #150622;
     font-size: 1.1em;
     padding: 0 3em 2em 3em;
     width: 80%;
@@ -67,6 +67,10 @@ li {
     margin: .25em;
 }
 
+#tally {
+    margin: .5em;
+}
+
 footer {
     display: flex;
     flex-direction: column;
@@ -74,17 +78,3 @@ footer {
     align-items: center;
     margin: 1em;
 }
-
-
-
-/* GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and score */

@@ -11,20 +11,22 @@ let highScores = document.getElementById("highScores");
 let timer = document.getElementById("timer");
 let answersList = document.getElementById("answersList");
 
-highScores.addEventListener("click", scoresChart());
 playNow.addEventListener("click", () => {
     beginQuiz();
     countdown();
 });
 
-//variables to count
+//variables that will be manipulated
 let i = 0;
 let win = 0;
 let lose = 0;
 let timeLeft = 0;
 let score = 0;
 let key = "";
+let userInitials = "";
+let userScore = 0;
 
+//Adding in keydown event for answering questions
 document.addEventListener('keydown', function (event) {
     if (timeLeft === 0) {
         return;
@@ -42,85 +44,94 @@ document.addEventListener('keydown', function (event) {
 
 
 
-//create an object for each question
+//Created an object for each question
 let questionObjects = [
     {
         question: "Commonly used data types does NOT include which of the following?",
-        answer1: "Alerts",
-        answer2: "Strings",
-        answer3: "Booleans",
-        answer4: "Numbers",
+        answer1: "a-  Alerts",
+        answer2: "b-  Strings",
+        answer3: "c-  Booleans",
+        answer4: "d-  Numbers",
         correctAnswer: "a"
     },
     {
-        question: "second question",
-        answer1: "A",
-        answer2: "B",
-        answer3: "C",
-        answer4: "D",
+        question: "What do we use to separate attributes from one another when creating Objects with JavaScript?",
+        answer1: "a-  semicolons;",
+        answer2: "b-  commas,",
+        answer3: "c-  hashtags#",
+        answer4: "d-  parentheses()",
         correctAnswer: "b"
     },
     {
-        question: "third question",
-        answer1: "A",
-        answer2: "B",
-        answer3: "C",
-        answer4: "D",
+        question: "What does it mean to Concatenate something in JavaScript?",
+        answer1: "a-  Con is the latin root for together... To eat together with cats!",
+        answer2: "b-  To focus intently on it.",
+        answer3: "c-  To link it together with something else.",
+        answer4: "d-  To break it down into smaller parts.",
         correctAnswer: "c"
     },
     {
-        question: "fourth question",
-        answer1: "A",
-        answer2: "B",
-        answer3: "C",
-        answer4: "D",
+        question: "Which of the following can be manipulated in the DOM with JavaScript?",
+        answer1: "a-  Headings",
+        answer2: "b-  Paragraphs",
+        answer3: "c-  Images",
+        answer4: "d-  All of the above",
         correctAnswer: "d"
     },
     {
-        question: "fifth question",
-        answer1: "A",
-        answer2: "B",
-        answer3: "C",
-        answer4: "D",
+        question: "Which of the following is NOT an assignment operator in JavaScript?",
+        answer1: "a-  equals",
+        answer2: "b-  =",
+        answer3: "c-  ==",
+        answer4: "d-  ===",
         correctAnswer: "a"
     }
 ]
-//Function to begin quiz and change DOM initially
+//Checking to see if we still have questions unused
 function beginQuiz() {
     answersList.style = "visibility: hidden;"
     if (i === questionObjects.length) {
-        alert("That's all, folks!");
+        tallyTotal.innerHTML = "Correct: " + win + "  Incorrect: " + lose;
         reportResults();
-        return;
-    }
-    tallyTotal.innerHTML = "Correct: " + win + "  Incorrect: " + lose;
-    playNow.innerHTML = "Think you know it? Hit the key that corresponds to your answer! (abcd)";
-    currentQuestion.innerHTML = questionObjects[i].question;
-    objectAnswer1.innerHTML = questionObjects[i].answer1;
-    objectAnswer2.innerHTML = questionObjects[i].answer2;
-    objectAnswer3.innerHTML = questionObjects[i].answer3;
-    objectAnswer4.innerHTML = questionObjects[i].answer4;
-}
-function checkInput() {
-    score = 5000 / timeLeft * win;
-    currentScore.innerHTML = "Your Score is " + Math.floor(score);
-    if (key == questionObjects[i].correctAnswer) {
-        alert("Correct!");
-        win = win + 1;
     } else {
-        alert("Incorrect, you'll get 'em next time...");
+        tallyTotal.innerHTML = "Correct: " + win + "  Incorrect: " + lose;
+        playNow.innerHTML = "Think you know it? Hit the key that corresponds to your answer! (abcd)";
+        currentQuestion.innerHTML = questionObjects[i].question;
+        objectAnswer1.innerHTML = questionObjects[i].answer1;
+        objectAnswer2.innerHTML = questionObjects[i].answer2;
+        objectAnswer3.innerHTML = questionObjects[i].answer3;
+        objectAnswer4.innerHTML = questionObjects[i].answer4;
+    }
+}
+//Checks the keydown input against correct answer
+function checkInput() {
+    score = Math.floor(timeLeft * win);
+    currentScore.innerHTML = "Your Score is " + score;
+    if (key == questionObjects[i].correctAnswer) {
+        win = win + 1;
+        i = i + 1;
+        alert("Correct!");
+
+    } else {
+        timeLeft = timeLeft - 20; //Reduces timer when incorrect
         lose = lose + 1;
-    } i = i + 1; beginQuiz();
+        i = i + 1;
+        alert("Incorrect, 20 seconds deducted from timer...");
+    } beginQuiz();
 }
 
 function reportResults() {
-    console.log(win);
-    console.log(lose);
-    console.log(timeLeft);
+    playNow.addEventListener("click", logScores);
+    playNow.innerHTML = "Click here to log your score and initials";
+    currentQuestion.innerHTML = "Thanks for Playing!";
+    objectAnswer1.innerHTML = "Your final score: " + score;
+    objectAnswer2.innerHTML = ""
+    objectAnswer3.innerHTML = ""
+    objectAnswer4.innerHTML = ""
 }
-
+//Created timer that will begin on quiz start and end on quiz finish
 function countdown() {
-    timeLeft = 180;
+    timeLeft = 120;
     let timeInterval = setInterval(function () {
         timeLeft--;
         timer.textContent = timeLeft + " seconds remaining."
@@ -134,20 +145,19 @@ function countdown() {
         }
     }, 1000);
 }
-
-function scoresChart() {
-
+//Logs scores and initials to Local Storage
+function logScores() {
+    userInitials = window.prompt("Please enter your initials");
+    localStorage.setItem("user-initials", userInitials);
+    localStorage.setItem("user-score", score);
 }
-
-
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and score
+//Outputs scores and initials from Local Storage
+function scoresChart() {
+    objectAnswer2.innerHTML = "High Score on Local Storage"
+    objectAnswer3.innerHTML = "Belongs to..."
+    if (!localStorage.getItem("user-initials")) {
+        objectAnswer4.innerHTML = "No one... Yet!";
+    } else {
+        objectAnswer4.innerHTML = localStorage.getItem("user-initials") + " : " + localStorage.getItem("user-score");
+    }
+}
