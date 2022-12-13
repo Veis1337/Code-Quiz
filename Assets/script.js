@@ -103,9 +103,9 @@ let questionObjects = [
     },
     {
         question: "Which of the following is NOT an assignment operator in JavaScript?",
-        answer1: "a-  equals",
+        answer1: "a-  =>",
         answer2: "b-  =",
-        answer3: "c-  ==",
+        answer3: "c-  >=",
         answer4: "d-  ===",
         correctAnswer: "a"
     }
