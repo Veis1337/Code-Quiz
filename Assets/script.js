@@ -11,11 +11,6 @@ let highScores = document.getElementById("highScores");
 let timer = document.getElementById("timer");
 let answersList = document.getElementById("answersList");
 
-playNow.addEventListener("click", () => {
-    beginQuiz();
-    countdown();
-});
-
 //variables that will be manipulated
 let i = 0;
 let win = 0;
@@ -25,6 +20,34 @@ let score = 0;
 let key = "";
 let userInitials = "";
 let userScore = 0;
+
+//Start the Quiz (& timer) button
+playNow.addEventListener("click", () => {
+    beginQuiz();
+    countdown();
+});
+
+//Phone controls
+let a = document.getElementById("a");
+let b = document.getElementById("b");
+let c = document.getElementById("c");
+let d = document.getElementById("d");
+a.onclick = function () {
+    key = "a";
+    checkInput();
+}
+b.onclick = function () {
+    key = "b";
+    checkInput();
+}
+c.onclick = function () {
+    key = "c";
+    checkInput();
+}
+d.onclick = function () {
+    key = "d";
+    checkInput();
+}
 
 //Adding in keydown event for answering questions
 document.addEventListener('keydown', function (event) {

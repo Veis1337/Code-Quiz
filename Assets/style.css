@@ -78,3 +78,10 @@ footer {
     align-items: center;
     margin: 1em;
 }
+
+
+@media (max-width: 1000px) {
+    header {
+    font-size: 10px;
+    }
+  }
