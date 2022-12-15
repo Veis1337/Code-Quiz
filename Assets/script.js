@@ -158,6 +158,10 @@ function countdown() {
     let timeInterval = setInterval(function () {
         timeLeft--;
         timer.textContent = timeLeft + " seconds remaining."
+        if (i === questionObjects.length) {
+            reportResults();
+            timer.textContent = "";
+        }
         if (timeLeft === 0) {
             clearInterval(timeInterval);
             timer.textContent = "";
@@ -173,6 +177,7 @@ function logScores() {
     userInitials = window.prompt("Please enter your initials");
     localStorage.setItem("user-initials", userInitials);
     localStorage.setItem("user-score", score);
+    i = questionObjects.length;
 }
 //Outputs scores and initials from Local Storage
 function scoresChart() {
